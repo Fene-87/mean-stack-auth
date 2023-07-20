@@ -1,11 +1,22 @@
 import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import cors from "cors";
 
 const app = express();
 
-app.use('/', (req, res) => {
-    return res.send('Hello there user!')
-})
+dotenv.config();
+
+const connectMongoDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO)
+        console.log("Connected to database")
+    } catch (error) {
+        throw error
+    }
+}
 
 app.listen(8800, () => {
-   console.log('Connected to backend')
+    connectMongoDB();
+    console.log('Connected to backend')
 })
