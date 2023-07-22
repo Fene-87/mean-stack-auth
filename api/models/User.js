@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const UserSchema = mongoose.Schema({
     firstName: {
@@ -30,15 +30,15 @@ const UserSchema = mongoose.Schema({
     isAdmin: {
         type: Boolean,
         default: false,
+    },
+    roles: {
+        type: [Schema.Types.ObjectId],
+        required: true,
+        ref: 'Role',
     }
 },
 {
     timeStamps: true
-})
+});
 
-const User = () => {
-    this.firstName;
-    this.lastName;
-    this.email;
-    this.password;
-}
+export default mongoose.model('User', UserSchema);
