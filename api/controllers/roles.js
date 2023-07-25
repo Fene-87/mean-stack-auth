@@ -17,6 +17,16 @@ export const createRole = async (req, res, next) => {
 export const updateRole = async (req, res, next) => {
     try {
         const role = await Role.findById({_id: req.params.id});
+        if(role) {
+            const newData = await Role.findByIdAndUpdate(
+                req.params.id,
+                {$set: req.body},
+                {new: true}
+            )
+            return res.status(200).send("Role Successfully Updated");
+        } else {
+            return res.status(404).send("Role not found");
+        }
     } catch (error) {
         return res.status(500).send("Internal Server Error");
     }
