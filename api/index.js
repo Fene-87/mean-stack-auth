@@ -10,7 +10,7 @@ dotenv.config();
 
 //middlewares
 app.use(express.json());
-app.use('/api/role', roleRoute)
+app.use('/api/role', roleRoute);
 
 const connectMongoDB = async () => {
     try {
