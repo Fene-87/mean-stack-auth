@@ -1,5 +1,5 @@
 import express from "express";
-import { createRole, updateRole } from "../controllers/roles.js";
+import { createRole, getRoles, updateRole } from "../controllers/roles.js";
 
 const router = express.Router();
 
@@ -8,5 +8,8 @@ router.post('/create', createRole);
 
 //update role
 router.put('/update/:id', updateRole);
+
+//get all roles
+router.get('/', getRoles);
 
 export default router;
