@@ -22,7 +22,7 @@ export const getUsers = async (req, res, next) => {
 
 export const updateUser = async (req, res, next) => {
     try {
-        const user = await User.findById(req.params.id);
+        const user = await User.findById({_id: req.params.id});
         if(user) {
             const newData = await User.findByIdAndUpdate(
                 req.params.id,
@@ -38,3 +38,16 @@ export const updateUser = async (req, res, next) => {
     }
 };
 
+export const deleteUser = async (req, res, next) => {
+    try {
+        const user = await User.findById({_id: req.params.id});
+        if(user) {
+            await User.findByIdAndDelete(req.body.id);
+            return res.status(200).send("User successfully deleted");
+        } else {
+            return res.status(404).send("User not found");
+        }
+    } catch (error) {
+        return res.status(500).send("Internal Server Error");
+    }
+};
