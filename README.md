@@ -16,9 +16,9 @@
 - [📝 License](#license)
 
 
-# 📖 CF Gym Registration <a name="about-project"></a>
+# 📖 MEAN stack auth <a name="about-project"></a>
 
-**CF Gym Registration** entails an Angular application designed to facilitate gym registration and provide a comprehensive fitness journey tracking system. The app is ideal for individuals pursuing their fitness goals, including those interested in weight loss challenges like "Slimpossible" or muscle-building endeavors like "Bulking."
+**MEAN Stack auth** entails web application designed to facilitate user registration and provide authentication and authorization. The project is basically made to further sharpen my skills on building a full stack web application using the MEAN stack.
 
 ## 🛠 Built With <a name="built-with"></a>
 
