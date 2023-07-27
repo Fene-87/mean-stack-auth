@@ -39,9 +39,9 @@
 </details>
 
 <details>
-  <summary>JSON Server</summary>
+  <summary>NodeJs</summary>
   <ul>
-    <li><a href="https://www.npmjs.com/package/json-server">JSON Server</a></li>
+    <li><a href="https://www.npmjs.com/package/json-server">NodeJs</a></li>
   </ul>
 </details>
 
