@@ -57,8 +57,7 @@
 ### Key Features <a name="key-features"></a>
 
 - **Registration**
-- **Calculate BMI**
-- **View enquiries**
+- **Authentication**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
