@@ -23,6 +23,22 @@ export const registerUser = async (req, res, next) => {
     }
 };
 
+export const login = async (req, res, next) => {
+    try {
+        const user = await User.findOne({email: req.body.email});
+        if(!user) {
+            return res.status(404).send("User not found");
+        }
+        const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password);
+        if(!isPasswordCorrect) {
+            return res.status(400).send("Incorrect Password");
+        }
+        return res.status(200).send("Login Successful");
+    } catch (error) {
+        return res.status(500).send("Internal Server Error");
+    }
+}
+
 export const getUsers = async (req, res, next) => {
     try {
         const users = await User.find({});
