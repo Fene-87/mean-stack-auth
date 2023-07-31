@@ -1,10 +1,10 @@
 import express from "express";
-import { createUser, deleteUser, getUsers, updateUser } from "../controllers/users.js";
+import { deleteUser, getUsers, registerUser, updateUser } from "../controllers/auth.js";
 
 const router = express.Router();
 
 // Create new user
-router.post('/create', createUser);
+router.post('/register', registerUser);
 
 // Fetch all users
 router.get('/', getUsers);

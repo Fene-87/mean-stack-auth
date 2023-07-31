@@ -1,10 +1,19 @@
+import Role from "../models/Role.js";
 import User from "../models/User.js";
 
-export const createUser = async (req, res, next) => {
-    const newUser = new User(req.body);
+export const registerUser = async (req, res, next) => {
+    const role = await Role.find({role: 'User'});
+    const newUser = new User({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        userName: req.body.userName,
+        email: req.body.email,
+        password: req.body.password,
+        roles: role,
+    });
     try {
         await newUser.save();
-        return res.status(200).send("User successfully created");
+        return res.status(200).send("User successfully registered");
         
     } catch (error) {
         return res.status(500).send("Internal Server Error");
