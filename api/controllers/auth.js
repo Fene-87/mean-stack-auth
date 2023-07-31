@@ -1,6 +1,8 @@
 import Role from "../models/Role.js";
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
+import { createSuccess } from "../utils/success.js";
+import { createError } from "../utils/error.js";
 
 export const registerUser = async (req, res, next) => {
     const role = await Role.find({role: 'User'});
@@ -16,10 +18,10 @@ export const registerUser = async (req, res, next) => {
     });
     try {
         await newUser.save();
-        return res.status(200).send("User successfully registered");
+        return next(createSuccess(200, "User successfully registered!"));
         
     } catch (error) {
-        return res.status(500).send("Internal Server Error");
+        return next(createError(500, "Internal Server Error!"));
     }
 };
 
@@ -27,24 +29,24 @@ export const login = async (req, res, next) => {
     try {
         const user = await User.findOne({email: req.body.email});
         if(!user) {
-            return res.status(404).send("User not found");
+            return next(createError(404, "User not found!"));
         }
         const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password);
         if(!isPasswordCorrect) {
-            return res.status(400).send("Incorrect Password");
+            return next(createError(400, "Incorrect Password"));
         }
-        return res.status(200).send("Login Successful");
+        return next(createSuccess(200, "Login Successful!"));
     } catch (error) {
-        return res.status(500).send("Internal Server Error");
+        return next(createError(500, "Internal Server Error!"));
     }
 }
 
 export const getUsers = async (req, res, next) => {
     try {
         const users = await User.find({});
-        return res.status(200).send(users);
+        return next(createSuccess(200, "success", users));
     } catch (error) {
-        return res.status(500).send("Internal Server Error");
+        return next(createError(500, "Internal Server Error!"));
     }
 };
 
@@ -57,12 +59,12 @@ export const updateUser = async (req, res, next) => {
                 {$set: req.body},
                 {new: true}
             )
-            return res.status(200).send("User successfully updated");
+            return next(createSuccess(200, "User successfully updated!"));
         } else {
-            return res.status(404).send("User not found");
+            return next(createError(404, "User not found!"));
         }
     } catch (error) {
-        return res.status(500).send("Internal Server Error");
+        return next(createError(500, "Internal Server Error!"));
     }
 };
 
@@ -71,11 +73,11 @@ export const deleteUser = async (req, res, next) => {
         const user = await User.findById({_id: req.params.id});
         if(user) {
             await User.findByIdAndDelete(req.body.id);
-            return res.status(200).send("User successfully deleted");
+            return next(createSuccess(200, "User successfully deleted!"));
         } else {
-            return res.status(404).send("User not found");
+            return next(createError(404, "User not found!"));
         }
     } catch (error) {
-        return res.status(500).send("Internal Server Error");
+        return next(createError(500, "Internal Server Error!"));
     }
 };
